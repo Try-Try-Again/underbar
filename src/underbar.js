@@ -199,12 +199,8 @@
   _.every = function(collection, iterator = a => a) {
     // TIP: Try re-using reduce() here.
     return _.reduce(collection, (wasFound, item) => {
-      if (!wasFound) {
-        //do nothing
-      } else {
-        if (iterator(item)) {
-          //do nothing
-        } else {
+      if (wasFound) {
+        if (!iterator(item)) {
           wasFound = false;
         }
       }

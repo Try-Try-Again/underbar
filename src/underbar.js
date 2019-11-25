@@ -185,7 +185,7 @@
   _.contains = function(collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
-    if (!Array.isArray(collection)) collection = Object.values(collection);
+    if (!Array.isArray(collection)) {collection = Object.values(collection);}
     return _.reduce(collection, function(wasFound, item) {
       if (wasFound) {
         return true;
@@ -196,8 +196,20 @@
 
 
   // Determine whether all of the elements match a truth test.
-  _.every = function(collection, iterator) {
+  _.every = function(collection, iterator = a => a) {
     // TIP: Try re-using reduce() here.
+    return _.reduce(collection, (wasFound, item) => {
+      if (!wasFound) {
+        //do nothing
+      } else {
+        if (iterator(item)) {
+          //do nothing
+        } else {
+          wasFound = false;
+        }
+      }
+      return wasFound;
+    }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is

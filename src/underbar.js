@@ -301,7 +301,18 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-  };
+    var history = {};
+
+    return function(){
+      var key = JSON.stringify(arguments);
+      if (history[key]){
+        return history[key];
+      }else{
+        history[key] = func.apply(this, arguments);
+        return history[key];
+      }
+    }
+  }
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.

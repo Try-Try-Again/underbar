@@ -210,8 +210,13 @@
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
-  _.some = function(collection, iterator) {
+  _.some = function(collection, iterator = x => x) {
     // TIP: There's a very clever way to re-use every() here.
+    var count = [];
+    for (var i = 0; i < collection.length; i++) {
+      if (iterator(collection[i])) {count.push(true);}
+    }
+    return count.length > 0;
   };
 
 

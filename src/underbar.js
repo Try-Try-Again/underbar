@@ -102,7 +102,19 @@
   };
 
   // Produce a duplicate-free version of the array.
-  _.uniq = function(array, isSorted, iterator) {
+  _.uniq = function(array, isSorted, iterator = false) {
+    var result = [];
+    for (var i = 0; i < array.length; i++) {
+      if (iterator) {
+        var testCase = iterator(array[i]);
+      } else {
+        var testCase = true;
+      }
+      if (result.indexOf(array[i]) === -1 && testCase) {
+        result.push(array[i]);
+      }
+    }
+    return result;
   };
 
 
